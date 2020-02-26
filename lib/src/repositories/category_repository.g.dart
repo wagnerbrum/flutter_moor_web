@@ -6,6 +6,6 @@ part of 'category_repository.dart';
 // DaoGenerator
 // **************************************************************************
 
-mixin _$CategoryRepositoryMixin on DatabaseAccessor<MyDatabase> {
+mixin _$CategoryRepositoryMixin on DatabaseAccessor<Database> {
   $CategoryTableTable get categoryTable => db.categoryTable;
 }

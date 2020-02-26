@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:moor_puro/src/database.dart';
+import 'package:moor_puro/src/database/main.dart';
 
 class CategoryAddPage extends StatefulWidget {
+  final db;
+  final repository;
+
+  CategoryAddPage({Key key, this.db, this.repository}) : super(key: key);
+
   @override
   _CategoryAddPageState createState() => _CategoryAddPageState();
 }
@@ -40,8 +45,7 @@ class _CategoryAddPageState extends State<CategoryAddPage> {
                 RaisedButton(
                   onPressed: () async {
                     _formKey.currentState.save();
-                    await MyDatabase.instance.categoryRepository
-                        .createEntity(entity);
+                    await this.widget.repository.createEntity(entity);
 
                     Navigator.pop(context);
                   },

@@ -1,13 +1,13 @@
 import 'package:moor/moor.dart';
-import 'package:moor_puro/src/database.dart';
+import 'package:moor_puro/src/database/main.dart';
 import 'package:moor_puro/src/tables/category_table.dart';
 
 part 'category_repository.g.dart';
 
 @UseDao(tables: [CategoryTable])
-class CategoryRepository extends DatabaseAccessor<MyDatabase>
+class CategoryRepository extends DatabaseAccessor<Database>
     with _$CategoryRepositoryMixin {
-  CategoryRepository(MyDatabase db) : super(db);
+  CategoryRepository(Database db) : super(db);
 
   Stream<List<Category>> getAllEntities() {
     return (select(categoryTable).watch());

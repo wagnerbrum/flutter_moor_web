@@ -1,4 +1,4 @@
-import 'package:moor_puro/src/database.dart';
+import 'package:moor_puro/src/database/main.dart';
 
 class PostWithCategory {
   final Post post;

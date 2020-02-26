@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:moor_puro/src/database/shared.dart';
 import 'package:moor_puro/src/pages/category_list_page.dart';
 
 class HomePage extends StatefulWidget {
+  var db;
+
+  HomePage({Key key}) : super(key: key) {
+    this.db = constructDb();
+  }
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -28,7 +35,8 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CategoryListPage(),
+                      builder: (context) =>
+                          CategoryListPage(db: this.widget.db),
                     ),
                   );
                 },

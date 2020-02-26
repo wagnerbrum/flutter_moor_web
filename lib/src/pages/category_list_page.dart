@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:moor_puro/src/database.dart';
+import 'package:moor_puro/src/database/main.dart';
 import 'package:moor_puro/src/pages/category_add_page.dart';
 import 'package:moor_puro/src/repositories/category_repository.dart';
 
 class CategoryListPage extends StatefulWidget {
+  final db;
+  var repository;
+
+  CategoryListPage({Key key, this.db}) : super(key: key) {
+    this.repository = new CategoryRepository(db);
+  }
+
   @override
   _CategoryListPageState createState() => _CategoryListPageState();
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  final repository = CategoryRepository(MyDatabase.instance);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +24,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
       ),
       body: StreamBuilder<List<Category>>(
         // stream: MyDatabase.instance.categoryRepository.getAllEntities(),
-        stream: repository.getAllEntities(),
+        stream: this.widget.repository.getAllEntities(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Container();
 
@@ -85,7 +90,10 @@ class _CategoryListPageState extends State<CategoryListPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CategoryAddPage(),
+              builder: (context) => CategoryAddPage(
+                db: this.widget.db,
+                repository: this.widget.repository,
+              ),
             ),
           );
         },
