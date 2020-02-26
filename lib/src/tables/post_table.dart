@@ -1,0 +1,9 @@
+import 'package:moor/moor.dart';
+
+@DataClassName('Post')
+class PostTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get title => text().withLength(min: 6, max: 32)();
+  TextColumn get content => text().named('body')();
+  IntColumn get category => integer().nullable()();
+}
